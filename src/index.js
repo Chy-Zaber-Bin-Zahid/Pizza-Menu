@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import './index.css'
+import "./index.css";
 
 const pizzaData = [
   {
@@ -60,20 +60,53 @@ function App() {
 function Header() {
   // const style = { color: "red", fontSize: "48px", textTransform: "uppercase" };
 
-  return <header className="header footer">
-    <h1 >Fast React Pizza Co.</h1>;
-  </header>
+  return (
+    <header className="header footer">
+      <h1>Fast React Pizza Co.</h1>;
+    </header>
+  );
 }
 
 function Menu() {
   return (
     <main className="menu">
       <h2>Our menu</h2>
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
+      <ul className="pizzas">
+        {pizzaData.map((pizza) => (
+          <Pizza
+            pizzaObj = {pizza}
+            key={pizza.name}
+          />
+        ))}
+      </ul>
+
+      {/* <Pizza
+        name="Pizza Spinaci"
+        ingredients="Tomato, mozarella, spinach, and ricotta cheese"
+        photoName="pizzas/spinaci.jpg"
+        price={10}
+      />
+
+      <Pizza
+        name="Pizza Funghi"
+        ingredients="Tomato, mozarella, spinach, and ricotta"
+        photoName="pizzas/funghi.jpg"
+        price={12}
+      /> */}
     </main>
+  );
+}
+
+function Pizza(props) {
+  return (
+    <li className="pizza">
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+        <span>{props.pizzaObj.price}</span>
+      </div>
+    </li>
   );
 }
 
@@ -91,17 +124,9 @@ function Footer() {
   // }
 
   return (
-    <footer className="footer">{new Date().toLocaleTimeString()}. We're currently open</footer>
-  );
-}
-
-function Pizza() {
-  return (
-    <div>
-      <img src="pizzas/spinaci.jpg" alt="Spinaci pizza" />
-      <h3>Pizza Spinaci</h3>
-      <p>Tomato, mozarella, spinach, and ricotta cheese</p>
-    </div>
+    <footer className="footer">
+      {new Date().toLocaleTimeString()}. We're currently open
+    </footer>
   );
 }
 
